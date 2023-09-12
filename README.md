@@ -1,6 +1,7 @@
 # funny-project
 some funny project
 ## 1. Project to get weather and soul tip from jinshan, shanbay or youdao
+需要注册高德开发者的key
 ## 2. 随机生成毒鸡汤
 下载毒鸡汤数据库https://github.com/egotong/nows, 下载工具将原mysql转化为
 ```b
