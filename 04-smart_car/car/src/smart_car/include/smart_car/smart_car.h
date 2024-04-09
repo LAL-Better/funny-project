@@ -18,6 +18,8 @@ typedef enum{
     SMART_CAR_MQTT_OK =1,
     SMART_CAR_ERR_UNKNOW =2,
     SMART_CAR_ERR_DIR =3,
+    SMART_CAR_MSG_NULL = 4,
+    SMART_CAR_MQTT_INIT_FAIL = 5,
 } smart_car_ret;
 
 typedef enum{
@@ -33,7 +35,6 @@ typedef struct mqtt_client_s {
     char*   topic;
     char*   payload;
     int     qos;
-    int     timeout;
 
     MQTTClient client;
     volatile MQTTClient_deliveryToken deliveredtoken;
@@ -43,10 +44,16 @@ typedef struct mqtt_client_s {
     smart_car_ret   (*connlost)(void *context, char *cause);
     smart_car_ret   (*mqtt_client_publish)(char *top, int qos, char *msg, int len, struct mqtt_client_s *client_s);
     smart_car_ret   (*mqtt_client_subscribe)(char *top, int qos, struct mqtt_client_s *client_s);
-    smart_car_ret   (*mqtt_client_open)(struct mqtt_client_s *client_s);
+    smart_car_ret   (*mqtt_client_open)(struct mqtt_client_s *client_s, void *context);
 }mqtt_client;
 
-smart_car_ret mqtt_client_init(mqtt_op_dir dir, char* clientid, char* address, int qos, mqtt_client *client_s);
+/// @brief 
+/// @param dir 
+/// @param clientid 
+/// @param address 
+/// @param client_s 
+/// @return 
+smart_car_ret mqtt_client_init(mqtt_op_dir dir, char* clientid, char* address, mqtt_client **client_s);
 
 /*use class to achieve mqtt client
 class MqttClient
